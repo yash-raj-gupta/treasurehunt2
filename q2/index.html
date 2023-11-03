@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Question Page</title>
+    <style>
+      body {
+        position: relative;
+        margin: 0;
+        height: 100vh;
+        background-color: #222;
+        overflow: hidden;
+      }
+
+      .number {
+        position: absolute;
+        animation: move 5s linear infinite;
+        color: white;
+      }
+
+      input {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        font-size: 16px;
+        background-color: #333;
+        color: white;
+      }
+
+      @keyframes move {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(50px, 50px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      p {
+        font-size: 1.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <input hidden type="text" placeholder="Enter a number" id="numberInput" />
+
+    <script>
+      const numberInput = document.getElementById("numberInput");
+
+      // Set a hidden question number in the placeholder
+      numberInput.placeholder = "5";
+
+      function getRandomPosition() {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        return { x, y };
+      }
+
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // Create and move random numbers
+      function createRandomNumber() {
+        const number = document.createElement("p");
+        number.textContent = Math.floor(Math.random() * 100);
+        number.classList.add("number");
+        const position = getRandomPosition();
+        const color = getRandomColor();
+
+        number.style.left = `${position.x}px`;
+        number.style.top = `${position.y}px`;
+        number.style.color = color;
+
+        document.body.appendChild(number);
+      }
+
+      // Create random numbers every second
+      setInterval(createRandomNumber, 750);
+    </script>
+  </body>
+</html>
