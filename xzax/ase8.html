@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question 8</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: transparent;
+        transition: background-color 0.3s;
+        border-radius: 20px;
+      }
+
+      button.disabled {
+        background-color: white;
+        cursor: not-allowed;
+      }
+      body{
+            background-color: #333;
+        }
+        .number {
+        position: absolute;
+        animation: move 5s linear infinite;
+        color: white;
+      }
+
+      input {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        font-size: 16px;
+        background-color: #333;
+        color: white;
+      }
+
+      @keyframes move {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(50px, 50px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      p {
+        font-size: 2.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="clickButton">Click me</button>
+
+    <script> 
+      let clickCount = 0;
+      const result = Math.floor(((Math.PI ** 2) * (Math.E ** 1)) / Math.sqrt(1000) - (Math.sin(Math.PI / 3) * 10) + (Math.max(5, 7) - Math.min(3, 1)) + (Math.log2(1024) - (2 ** 3) + Math.ceil(9.8)))+5;
+      function handleClick() {
+        clickCount++;
+        if (clickCount >= result) {
+          document.getElementById("clickButton").disabled = true;
+          document.getElementById("clickButton").classList.add("disabled");
+          document.body.style.backgroundColor = "transparent";
+        }
+      }
+
+      document
+        .getElementById("clickButton")
+        .addEventListener("click", handleClick);
+
+
+        function getRandomPosition() {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      return { x, y };
+    }
+
+    function getRandomColor() {
+      const letters = "0F";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 2)];
+      }
+      return color;
+    }
+
+    // Create and move random numbers
+    function createRandomNumber() {
+      const number = document.createElement("p");
+      number.textContent = Math.floor(Math.random() * 10);
+      number.classList.add("number");
+      const position = getRandomPosition();
+      const color = getRandomColor();
+
+      number.style.left = `${position.x}px`;
+      number.style.top = `${position.y}px`;
+      number.style.color = color;
+
+      document.body.appendChild(number);
+    }
+
+    setInterval(createRandomNumber, 100);
+    </script>
+  </body>
+</html>

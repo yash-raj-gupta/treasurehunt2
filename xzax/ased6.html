@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question 6</title>
+    <style>
+      body {
+        background-color: #7e7e7e;
+      }
+      .container {
+        width: 45%; /* Set the width of each div to be less than 50% */
+        height: 50%; /* Set the height of each div to be less than 50% */
+        position: absolute; /* Position divs absolutely */
+        top: 0; /* Position divs at the top */
+        left: 0; /* Position divs at the left */
+      }
+      .number {
+        position: absolute;
+        animation: move 5s linear infinite;
+        color: white;
+      }
+
+      .picture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      @keyframes move {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(50px, 50px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      p {
+        font-size: 1.8rem;
+      }
+      input {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+        font-size: 16px;
+        background-color: #333;
+        color: white;
+      }
+      p{
+        font-size: 2.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>8</h1>
+    <h1>5</h1>
+    <h1>3</h1>
+    <div">
+      <div class="container a">
+        <img class="picture" src="4.jpg" alt="Picture 1" />
+      </div>
+      <div class="container b">
+        <img class="picture" src="one.jpg" alt="Picture 2" />
+      </div>
+      <div class="container c">
+        <img class="picture" src="two (2).jpg" alt="Picture 3" />
+      </div>
+      <div class="container d">
+        <img class="picture" src="three.jpg" alt="Picture 4" />
+      </div>
+      <div class="container d">
+        <img class="picture" src="5.jpg" alt="Picture 4" />
+      </div>
+    </div>
+
+    <script>
+      function getRandomPosition() {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        return { x, y };
+      }
+
+      function getRandomColor() {
+        const letters = "0F";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 2)];
+        }
+        return color;
+      }
+
+      function createRandomNumber() {
+        const number = document.createElement("p");
+        number.textContent = Math.floor(Math.random() * 10);
+        number.classList.add("number");
+        const position = getRandomPosition();
+        const color = getRandomColor();
+
+        number.style.left = `${position.x}px`;
+        number.style.top = `${position.y}px`;
+        number.style.color = color;
+
+        document.body.appendChild(number);
+      }
+
+      // Create random numbers every second
+      setInterval(createRandomNumber, 300);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question 1</title>
+    <style>
+      .abcs {
+        position: relative;
+        margin: 0;
+        height: 100vh;
+        background-color: #222;
+        overflow: hidden;
+      }
+
+      .xyzax {
+        position: absolute;
+        animation: move 5s linear infinite;
+        color: white;
+      }
+
+      .hidden-number {
+        position: absolute;
+        background-color: #222;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #222;
+      }
+
+      @keyframes move {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(50px, 50px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      p {
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body class="abcs">
+    <p hidden>11</p>
+    <p hidden>23</p>
+    <div class="hidden-number">
+      <p hidden>13</p>
+      <p hidden>23</p>
+      <p style="color: white">7</p><br>
+      <p style="color: white">8</p><br>
+      <div>
+        <p hidden>1</p>
+        <p hidden>3</p>
+        <p style="color: #222">2</p>
+      </div>
+      <p style="color: white">9</p><br>
+      <p style="color: white">10</p>
+
+      <p hidden>4</p>
+    </div>
+
+    <p style="color: white">9</p><br>
+    <p style="color: white">10</p>
+    <script>
+      function getRandomPosition() {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        return { x, y };
+      }
+
+      function getRandomColor() {
+        const letters = "0F";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 2)];
+        }
+        return color;
+      }
+
+      // Create and move random numbers
+      function createRandomNumber() {
+        const number = document.createElement("p");
+        number.textContent = Math.floor(Math.random() * 10);
+        number.classList.add("xyzax");
+        const position = getRandomPosition();
+        const color = getRandomColor();
+
+        number.style.left = `${position.x}px`;
+        number.style.top = `${position.y}px`;
+        number.style.color = color;
+
+        document.body.appendChild(number);
+      }
+
+      // Create random numbers every second
+      setInterval(createRandomNumber, 300);
+    </script>
+  </body>
+</html>
